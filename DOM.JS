@@ -1,62 +1,83 @@
-//Names
-var nameArray = document.getElementsByName('names')[0].innerHTML.split('\n');
+var currentPage = document.location.pathname.split('/');
+currentPage = currentPage[currentPage.length-1];
 
-var allNamesClick = document.getElementById('all-names');
-var firstNamesClick = document.getElementById('first-names');
-var lastNamesClick = document.getElementById('last-names');
-var namesWithLengthClick = document.getElementById('names-with-lengths');
+if(currentPage === 'index.html'){
+  //Index page divs
+  var answerDiv = document.getElementById('answer');
+  var options = document.getElementsByName('prices')[0];
 
-allNamesClick.onclick = function(){allNames();};
-firstNamesClick.onclick = function(){firstLastNames(0);};
-lastNamesClick.onclick = function(){firstLastNames(1);};
-namesWithLengthClick.onclick = function(){namesWithLength();};
+  // Gets the sum-all button from DOM and adds a click listener
+  var sumAllButton = document.getElementById('sum-all');
+  sumAllButton.addEventListener("click",function(event){
+    var total = sum(options);
+    answerDiv.innerHTML = "$"+total;
+  });
 
-function printName(valueArr, lengthArr){
-  var list = document.getElementById('out');
-  list.innerHTML = null;
-  for (var i = 0; i < valueArr.length; i++) {
-    var listItem = document.createElement('li');
-    listItem.innerHTML = valueArr[i] + " " + lengthArr[i];
-    list.appendChild(listItem);
-  }
+  // Gets the count selected button from DOM and adds a click listener
+  var countSelectedButton = document.getElementById('count-selected');
+  countSelectedButton.addEventListener("click",function(event){
+    var numSelected = countSelected(options);
+    answerDiv.innerHTML = numSelected;
+  });
+
+  // Gets the sum selected button from DOM and adds a click listener
+  var sumSelectedButton = document.getElementById('sum-selected');
+  sumSelectedButton.addEventListener("click",function(event){
+    var sum = sumSelected(options)
+    answerDiv.innerHTML = "$"+sum;
+  });
+
+  // gets the average-all button and adds a click listener
+  var averageAllButton = document.getElementById('average-all');
+  averageAllButton.addEventListener("click",function(event){
+    var avg = averageAll(options);
+    answerDiv.innerHTML = "$"+avg;
+  });
+
+  // gets the average-selected button and adds a click listener
+  var averageSelectedButton = document.getElementById('average-selected');
+  averageSelectedButton.addEventListener("click",function(event){
+    var avg = averageSelected(options);
+    answerDiv.innerHTML = "$"+avg;
+  });
 }
 
-//Prices
-var sumAllClick = document.getElementById('sum-all');
-sumAllClick.onclick = function(){sumAll();};
-var sumSelectedClick = document.getElementById('sum-selected');
-sumSelectedClick.onclick = function(){sumSelected();};
-var countSelectedClick = document.getElementById('count-selected');
-countSelectedClick.onclick = function(){countSelected();};
-var averageAllClick = document.getElementById('average-all');
-averageAllClick.onclick = function(){averageAll();};
-var averageSelectedClick = document.getElementById('average-selected');
-averageSelectedClick.onclick = function(){averageSelected();};
+if(currentPage === 'names.html'){
+  // names.html divs
+  var names = document.getElementsByName('names')[0].value;
+  var answerUL = document.getElementById('answerUL');
 
-function getAll(){
-  var select = document.getElementsByName('prices')[0];
-  var options = [];
-  for (var i = 0; i < select.length; i++) {
-      options.push(select[i]);
-  }
-  return options;
-}
+  //gets the all-names button and adds a click listener
+  var allNamesButton = document.getElementById('all-names');
+  allNamesButton.addEventListener('click',function(event){
+    var nameList = namesList(names);
+    displayToLi(nameList);
+  });
 
-function getSelected(){
-  var select = document.getElementsByName('prices')[0];
-  var options = [];
-  for (var i = 0; i < select.length; i++) {
-    if(select[i].selected === true){
-      options.push(select[i]);
+  var firstNamesButton = document.getElementById('first-names');
+  firstNamesButton.addEventListener('click',function(event){
+    var firstNameList = firstNames(names);
+    displayToLi(firstNameList);
+  });
+
+  var lastNamesButton = document.getElementById('last-names');
+  lastNamesButton.addEventListener('click',function(event){
+    var lastNameList = lastNames(names);
+    displayToLi(lastNameList);
+  });
+
+  var nameLengthsButton = document.getElementById('names-with-lengths');
+  nameLengthsButton.addEventListener('click',function(event){
+    var nameLengthList = nameLength(names);
+    displayToLi(nameLengthList);
+  });
+
+  function displayToLi(list){
+    answerUL.innerHTML = '';
+    for (var i=0;i<list.length;i++){
+      var li = document.createElement('li');
+      li.innerHTML = list[i];
+      answerUL.appendChild(li);
     }
   }
-  return options;
-}
-
-function print(value){
-var answerBlock = document.getElementById('output');
-var answer = document.createElement('p');
-answer.innerHTML = value;
-answerBlock.appendChild(answer);
-
 }

@@ -1,70 +1,71 @@
-//Names
-
-function allNames(){
-  var firstLast = nameArray;
-  printName(firstLast);
-}
-function firstLastNames (index){
-  var localNameArray = nameArray;
-  var firstOrLast = [];
-  for (var i = 0; i < nameArray.length; i++) {
-     var nameSplit = localNameArray[i].split(" ");
-     firstOrLast.push(nameSplit[index]);
-   }
-   printName(firstOrLast);
-}
-function namesWithLength(){
-  var localNameArray = nameArray;
-  var firstAndLength = [];
-  var firstLength = [];
-  for (var i = 0; i < nameArray.length; i++) {
-     var nameLength = localNameArray[i].split(" ");
-     firstLength.push(nameLength[0].length);
-     firstAndLength.push(nameLength[0]);
-   }
-   printName(firstAndLength, firstLength);
+function sum(options){
+  var total=0;
+  for(var i=0;i<options.length;i++){
+    total+=Number(options[i].value);
+  };
+  return total;
 };
 
-//////////////////prices//////////////////
-function sumAll(){
-  var all = getAll();
-  var sum = 0;
-  for (var i = 0; i < all.length; i++) {
-    sum += parseInt(all[i].value);
-  }
-  print(sum);
-}
+function countSelected(options){
+  var num=0;
+  for(var i=0;i<options.length;i++){
+    if(options[i].selected){
+      num++;
+    };
+  };
+  return num;
+};
 
-function sumSelected(){
-  var selected = getSelected();
-  var summed = 0;
-  for (var i = 0; i < selected.length; i++) {
-    summed += parseInt(selected[i].value);
-  }
-  print(summed);
-}
+function sumSelected(options){
+  var sum=0;
+  for(var i=0;i<options.length;i++){
+    if(options[i].selected){
+      sum+=Number(options[i].value);
+    };
+  };
+  return sum;
+};
 
-function countSelected(){
-  var selected = getSelected();
-  print(selected.length);
-}
+function averageAll(options){
+  var average = sum(options);
+  return average/options.length;
+};
 
-function averageSelected(){
-  var selected = getSelected();
-  var average = 0;
-  for (var i = 0; i < selected.length; i++) {
-    average += parseInt(selected[i].value);
-  }
-  average = average/selected.length;
-  print(average);
-}
+function averageSelected(options){
+  return sumSelected(options)/countSelected(options);
+};
 
-function averageAll(){
-  var selected = getAll();
-  var average = 0;
-  for (var i = 0; i < selected.length; i++) {
-    average += parseInt(selected[i].value);
-  }
-  average = average/selected.length;
-  print(average);
-}
+function namesList(names){
+  var nameList = names.split("\n");
+  return nameList;
+};
+
+function firstNames(names){
+  var nameList = namesList(names);
+  var currentEl;
+  var firstNameList = [];
+  for(var i=0; i<nameList.length;i++){
+    currentEl = nameList[i].split(" ");
+    firstNameList.push(currentEl[0]);
+  };
+  return firstNameList;
+};
+
+function lastNames(names){
+  var nameList = namesList(names);
+  var currentEl;
+  var lastNameList = [];
+  for(var i=0; i<nameList.length;i++){
+    currentEl = nameList[i].split(" ");
+    lastNameList.push(currentEl[1]);
+  };
+  return lastNameList;
+};
+
+function nameLength(names){
+  var nameList = namesList(names);
+  for(var i=0;i<nameList.length;i++){
+    nameList[i] += ": "+nameList[i].length;
+  };
+  return nameList;
+};

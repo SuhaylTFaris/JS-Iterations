@@ -43,3 +43,28 @@ function sumSelected(){
   }
   print(summed);
 }
+
+function countSelected(){
+  var selected = getSelected();
+  print(selected.length);
+}
+
+function averageSelected(){
+  var selected = getSelected();
+  var average = 0;
+  for (var i = 0; i < selected.length; i++) {
+    average += parseInt(selected[i].value);
+  }
+  average = average/selected.length;
+  print(average);
+}
+
+function averageAll(){
+  var selected = getAll();
+  var average = 0;
+  for (var i = 0; i < selected.length; i++) {
+    average += parseInt(selected[i].value);
+  }
+  average = average/selected.length;
+  print(average);
+}

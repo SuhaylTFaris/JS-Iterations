@@ -41,3 +41,22 @@ function getAll(){
   }
   return options;
 }
+
+function getSelected(){
+  var select = document.getElementsByName('prices')[0];
+  var options = [];
+  for (var i = 0; i < select.length; i++) {
+    if(select[i].selected === true){
+      options.push(select[i]);
+    }
+  }
+  return options;
+}
+
+function print(value){
+var answerBlock = document.getElementById('output');
+var answer = document.createElement('p');
+answer.innerHTML = value;
+answerBlock.appendChild(answer);
+
+}

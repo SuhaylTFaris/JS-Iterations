@@ -20,3 +20,24 @@ function printName(valueArr, lengthArr){
     list.appendChild(listItem);
   }
 }
+
+//Prices
+var sumAllClick = document.getElementById('sum-all');
+sumAllClick.onclick = function(){sumAll();};
+var sumSelectedClick = document.getElementById('sum-selected');
+sumSelectedClick.onclick = function(){sumSelected();};
+var countSelectedClick = document.getElementById('count-selected');
+countSelectedClick.onclick = function(){countSelected();};
+var averageAllClick = document.getElementById('average-all');
+averageAllClick.onclick = function(){averageAll();};
+var averageSelectedClick = document.getElementById('average-selected');
+averageSelectedClick.onclick = function(){averageSelected();};
+
+function getAll(){
+  var select = document.getElementsByName('prices')[0];
+  var options = [];
+  for (var i = 0; i < select.length; i++) {
+      options.push(select[i]);
+  }
+  return options;
+}
